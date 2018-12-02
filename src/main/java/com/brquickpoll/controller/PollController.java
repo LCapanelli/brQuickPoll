@@ -1,6 +1,7 @@
 package com.brquickpoll.controller;
 
 import java.net.URI;
+import java.util.Optional;
 
 import javax.inject.Inject;
 
@@ -23,7 +24,7 @@ public class PollController {
 	@Inject
 	private PollRepository pollRepository; 
 	
-	//GET method to all polls
+	//GET method to retrieve all Polls
 	@RequestMapping(value="/polls", method=RequestMethod.GET)
 	public ResponseEntity<Iterable<Poll>> getAllPolls(){
 		Iterable<Poll> allPolls = pollRepository.findAll();
@@ -31,7 +32,15 @@ public class PollController {
 		return new ResponseEntity<>(allPolls, HttpStatus.OK);
 	}
 	
-	//POST to create new Poll
+	//GET specific Poll
+	@RequestMapping(value="/polls/{pollId}", method=RequestMethod.GET)
+	public ResponseEntity<?> getPoll(@PathVariable Long pollId){
+		Optional<Poll> p = pollRepository.findById(pollId);
+		
+		return new ResponseEntity<>(p, HttpStatus.OK);
+	}
+	
+	//POST to create a new Poll
 	@RequestMapping(value="/polls", method=RequestMethod.POST)
 	public ResponseEntity<?> createPoll(@RequestBody Poll poll){
 		poll = pollRepository.save(poll);
@@ -48,5 +57,18 @@ public class PollController {
 		return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
 	}
 	
+	//PUT to Update a Poll
+	@RequestMapping(value="/polls/{pollId}", method=RequestMethod.PUT)
+	public ResponseEntity<?> updatePoll(@RequestBody Poll poll, @PathVariable Long pollId){
+		
+		Poll p = pollRepository.save(poll);
+		return new ResponseEntity<>(p, HttpStatus.OK);
+	}
 	
+	//DELETE to delete a Poll
+	@RequestMapping(value="/polls/{pollId}", method=RequestMethod.DELETE)
+	public ResponseEntity<?> deletePoll(@PathVariable Long pollId){
+		pollRepository.deleteById(pollId);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }
