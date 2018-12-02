@@ -1,4 +1,4 @@
-package com.brquickpoll.brquickpoll;
+package com.brquickpoll;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

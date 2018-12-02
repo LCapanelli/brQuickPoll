@@ -50,4 +50,9 @@ public class Poll {
 		this.options = options;
 	} 
 	
+	@Override
+	public String toString() {
+		return getId() + ", " + getQuestion() + ", " + getOptions();
+	}
+	
 }
