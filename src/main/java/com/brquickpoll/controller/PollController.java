@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.brquickpoll.domain.Poll;
+import com.brquickpoll.exception.ResourceNotFoundException;
 import com.brquickpoll.repository.PollRepository;
 
 @RestController
@@ -36,6 +37,9 @@ public class PollController {
 	@RequestMapping(value="/polls/{pollId}", method=RequestMethod.GET)
 	public ResponseEntity<?> getPoll(@PathVariable Long pollId){
 		Optional<Poll> p = pollRepository.findById(pollId);
+			if (p == null) {
+				throw new ResourceNotFoundException("Enquete de número " + pollId + " não encontrada!");
+			}
 		
 		return new ResponseEntity<>(p, HttpStatus.OK);
 	}
