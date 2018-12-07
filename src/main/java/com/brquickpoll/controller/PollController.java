@@ -36,8 +36,8 @@ public class PollController {
 	//GET specific Poll
 	@RequestMapping(value="/polls/{pollId}", method=RequestMethod.GET)
 	public ResponseEntity<?> getPoll(@PathVariable Long pollId){
-		Poll p = pollRepository.findById(pollId)
-				.orElseThrow(() -> new ResourceNotFoundException("Enquete de número " + pollId + " não encontrada!"));
+		verifyPoll(pollId);
+		Optional<Poll> p = pollRepository.findById(pollId);
 		
 		return new ResponseEntity<>(p, HttpStatus.OK);
 	}
@@ -62,7 +62,7 @@ public class PollController {
 	//PUT to Update a Poll
 	@RequestMapping(value="/polls/{pollId}", method=RequestMethod.PUT)
 	public ResponseEntity<?> updatePoll(@RequestBody Poll poll, @PathVariable Long pollId){
-		
+		verifyPoll(pollId);
 		Poll p = pollRepository.save(poll);
 		return new ResponseEntity<>(p, HttpStatus.OK);
 	}
@@ -70,7 +70,13 @@ public class PollController {
 	//DELETE to delete a Poll
 	@RequestMapping(value="/polls/{pollId}", method=RequestMethod.DELETE)
 	public ResponseEntity<?> deletePoll(@PathVariable Long pollId){
+		verifyPoll(pollId);
 		pollRepository.deleteById(pollId);
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	protected void verifyPoll(Long pollId) throws ResourceNotFoundException{
+		Poll poll = pollRepository.findById(pollId)
+				.orElseThrow(() -> new ResourceNotFoundException("Enquete de número " + pollId + " não encontrada!"));
 	}
 }
