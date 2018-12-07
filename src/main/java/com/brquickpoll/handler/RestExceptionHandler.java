@@ -29,7 +29,7 @@ public class RestExceptionHandler {
 		errorDetail.setTimeStamp(new Date().getTime());
 		
 		//devMessage: tech info for devs
-		errorDetail.setDevMessage(res.getMessage().getClass().getName());
+		errorDetail.setDevMessage(res.getClass().getName());
 		
 		return new ResponseEntity<>(errorDetail, null, HttpStatus.NOT_FOUND);
 	}
