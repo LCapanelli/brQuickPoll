@@ -36,10 +36,8 @@ public class PollController {
 	//GET specific Poll
 	@RequestMapping(value="/polls/{pollId}", method=RequestMethod.GET)
 	public ResponseEntity<?> getPoll(@PathVariable Long pollId){
-		Optional<Poll> p = pollRepository.findById(pollId);
-			if (p == null) {
-				throw new ResourceNotFoundException("Enquete de número " + pollId + " não encontrada!");
-			}
+		Poll p = pollRepository.findById(pollId)
+				.orElseThrow(() -> new ResourceNotFoundException("Enquete de número " + pollId + " não encontrada!"));
 		
 		return new ResponseEntity<>(p, HttpStatus.OK);
 	}
