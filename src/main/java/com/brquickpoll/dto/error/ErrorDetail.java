@@ -1,5 +1,9 @@
 package com.brquickpoll.dto.error;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
 /*
  * Custom error handling to Responses
  * 
@@ -11,6 +15,7 @@ public class ErrorDetail {
 	private String detail; 
 	private long timeStamp;
 	private String devMessage;
+	private Map<String, List<ValidationError>> errors = new HashMap<String, List<ValidationError>>();
 	
 	public String getTitle() {
 		return title;
@@ -49,6 +54,14 @@ public class ErrorDetail {
 	
 	public void setDevMessage(String devMessage) {
 		this.devMessage = devMessage;
+	}
+
+	public Map<String, List<ValidationError>> getErrors() {
+		return errors;
+	}
+
+	public void setErrors(Map<String, List<ValidationError>> errors) {
+		this.errors = errors;
 	} 
 		
 }
