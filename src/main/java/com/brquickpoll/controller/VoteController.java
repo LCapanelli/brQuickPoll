@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.brquickpoll.domain.Vote;
-import com.brquickpoll.repository.VoteRepository;;
+import com.brquickpoll.repository.VoteRepository;
+import com.wordnik.swagger.annotations.Api;;
 
 @RestController
+@Api(value="votes", description="Vote API")
 public class VoteController {
 
 	@Inject

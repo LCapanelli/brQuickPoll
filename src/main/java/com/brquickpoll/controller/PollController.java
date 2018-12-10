@@ -17,10 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.brquickpoll.domain.Poll;
+import com.brquickpoll.dto.error.ErrorDetail;
 import com.brquickpoll.exception.ResourceNotFoundException;
 import com.brquickpoll.repository.PollRepository;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
+@Api(value="polls", description="Poll API")
 public class PollController {
 
 	@Inject
@@ -28,6 +34,7 @@ public class PollController {
 	
 	//GET method to retrieve all Polls
 	@RequestMapping(value="/polls", method=RequestMethod.GET)
+	@ApiOperation(value="Retrieves all the polls", response=Poll.class, responseContainer="List")
 	public ResponseEntity<Iterable<Poll>> getAllPolls(){
 		Iterable<Poll> allPolls = pollRepository.findAll();
 		
@@ -36,6 +43,7 @@ public class PollController {
 	
 	//GET specific Poll
 	@RequestMapping(value="/polls/{pollId}", method=RequestMethod.GET)
+	@ApiOperation(value="Retrieves a Poll associated with the Id", response=Poll.class)
 	public ResponseEntity<?> getPoll(@PathVariable Long pollId){
 		verifyPoll(pollId);
 		Optional<Poll> p = pollRepository.findById(pollId);
@@ -45,7 +53,10 @@ public class PollController {
 	
 	//POST to create a new Poll
 	@RequestMapping(value="/polls", method=RequestMethod.POST)
-	public ResponseEntity<?> createPoll(@Valid @RequestBody Poll poll){
+	@ApiOperation(value="Creates a new Poll", notes="The newly created poll Id will be sent in the Header", response=Void.class)
+	@ApiResponses(value={@ApiResponse(code=201, message="Poll created successfuly", response=Void.class),
+			@ApiResponse(code=500, message="Error creating poll", response=ErrorDetail.class)})
+	public ResponseEntity<Void> createPoll(@Valid @RequestBody Poll poll){
 		poll = pollRepository.save(poll);
 		
 		//Set the location HEADER for the newly created resource

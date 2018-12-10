@@ -16,8 +16,10 @@ import com.brquickpoll.domain.Vote;
 import com.brquickpoll.dto.OptionCount;
 import com.brquickpoll.dto.VoteResult;
 import com.brquickpoll.repository.VoteRepository;
+import com.wordnik.swagger.annotations.Api;
 
 @RestController
+@Api(value="results", description="Compute Results API")
 public class ComputeResultController {
 
 	@Inject
