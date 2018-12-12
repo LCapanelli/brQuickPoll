@@ -1,4 +1,4 @@
-package com.brquickpoll.controller;
+package com.brquickpoll.v1.controller;
 
 import java.net.URI;
 import java.util.Optional;
@@ -25,7 +25,8 @@ import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 
-@RestController
+@RestController("pollControllerV1")
+@RequestMapping("/v1/")
 @Api(value="polls", description="Poll API")
 public class PollController {
 

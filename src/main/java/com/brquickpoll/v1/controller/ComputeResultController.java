@@ -1,4 +1,4 @@
-package com.brquickpoll.controller;
+package com.brquickpoll.v1.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +18,8 @@ import com.brquickpoll.dto.VoteResult;
 import com.brquickpoll.repository.VoteRepository;
 import com.wordnik.swagger.annotations.Api;
 
-@RestController
+@RestController("computeResultControllerV1")
+@RequestMapping("/v1/")
 @Api(value="results", description="Compute Results API")
 public class ComputeResultController {
 
