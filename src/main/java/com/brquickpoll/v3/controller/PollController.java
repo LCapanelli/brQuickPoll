@@ -29,7 +29,7 @@ import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController("pollControllerV3")
-@RequestMapping("/v3/")
+@RequestMapping({"/v3/", "/oauth2/v3/"})
 @Api(value="polls", description="Poll API")
 public class PollController {
 
