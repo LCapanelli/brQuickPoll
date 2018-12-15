@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.brquickpoll.domain.Poll;
 import com.brquickpoll.dto.error.ErrorDetail;
@@ -83,6 +84,7 @@ public class PollController {
 	}
 	
 	//DELETE to delete a Poll
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@RequestMapping(value="/polls/{pollId}", method=RequestMethod.DELETE)
 	public ResponseEntity<?> deletePoll(@PathVariable Long pollId){
 		verifyPoll(pollId);
