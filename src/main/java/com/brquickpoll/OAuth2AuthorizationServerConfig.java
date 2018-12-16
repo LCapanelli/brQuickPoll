@@ -25,7 +25,7 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
 		clients
 			.inMemory()
 				.withClient("brQuickPollMobileClient")
-				.secret("top_secret")
+				.secret("{noop}secret")
 				.authorizedGrantTypes("password")
 				.scopes("read", "write")
 				.resourceIds("BrQuickPoll_Resources");

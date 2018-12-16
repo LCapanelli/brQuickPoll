@@ -33,7 +33,7 @@ public class BrQuickPollUserDetailsService implements UserDetailsService {
 		
 		//Creating a granted auth based on users's role
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		if (user.isAdmin()) {
+		if (user.admin()) {
 			authorities = AuthorityUtils.createAuthorityList("ROLE_ADMIN");
 		}
 		

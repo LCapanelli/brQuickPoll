@@ -35,10 +35,10 @@ public class User {
 	@NotEmpty
 	private String lastName; 
 	
-	@Column(name="ISADMIN", columnDefinition="char(3)")
+	@Column(name="ADMIN", columnDefinition="char(3)")
 	@Type(type="yes_no")
 	@NotEmpty
-	private boolean isAdmin;
+	private boolean admin;
 
 	public Long getId() {
 		return id;
@@ -80,12 +80,12 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public boolean isAdmin() {
-		return isAdmin;
+	public boolean admin() {
+		return admin;
 	}
 
 	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
+		this.admin = isAdmin;
 	} 
 	
 	
