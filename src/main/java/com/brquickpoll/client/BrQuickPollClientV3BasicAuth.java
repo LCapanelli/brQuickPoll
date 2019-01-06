@@ -21,3 +21,4 @@ public class BrQuickPollClientV3BasicAuth {
 		return headers;
 	}
 }
+ 
