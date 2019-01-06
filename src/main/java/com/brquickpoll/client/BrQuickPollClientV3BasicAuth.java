@@ -8,6 +8,16 @@ import org.springframework.web.client.RestTemplate;
 
 public class BrQuickPollClientV3BasicAuth {
 
+	private static final String BRQUICK_POLL_URI_V3 = "http://localhost:8080/v3/polls";
+	private RestTemplate restTemplate = new RestTemplate();
+	
+	public void deletePoll(Long pollId) {
+		HttpHeaders authenticationHeaders = getAuthenticationHeader("admin", "admin");
+		restTemplate.exchange(BRQUICK_POLL_URI_V3 + "/{pollId}", 
+				HttpMethod.DELETE, new HttpEntity<Void>(authenticationHeaders),
+				Void.class, 
+				pollId);
+	}
 	
 	//Basic Authentication for V3 client
 	private HttpHeaders getAuthenticationHeader(String username, String password) {
